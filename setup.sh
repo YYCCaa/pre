@@ -68,6 +68,10 @@ npm run test:simulator
 # ===========================
 
 # Check that all imports work:
+: <<'COMMENT'
+This is a block comment
+using a no-op (:) and a heredoc.
+It won't be executed.
 cd ../backend
 npx tsc --noEmit  # Should complete without errors
 
@@ -82,3 +86,4 @@ cd ../frontend
 npm run build
 
 echo "✅ If all commands above complete successfully, your installation is ready!"
+COMMENT

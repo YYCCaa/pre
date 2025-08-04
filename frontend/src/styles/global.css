@@ -1,0 +1,287 @@
+// src/styles/globals.css (Enhanced version)
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theme customization */
+:root {
+  --color-primary: 59 130 246;
+  --color-primary-foreground: 255 255 255;
+  --color-secondary: 243 244 246;
+  --color-secondary-foreground: 17 24 39;
+  --color-accent: 249 250 251;
+  --color-accent-foreground: 17 24 39;
+  --color-destructive: 239 68 68;
+  --color-destructive-foreground: 255 255 255;
+  --color-border: 229 231 235;
+  --color-input: 229 231 235;
+  --color-ring: 59 130 246;
+  --radius: 0.5rem;
+}
+
+[data-theme="dark"] {
+  --color-primary: 59 130 246;
+  --color-primary-foreground: 255 255 255;
+  --color-secondary: 31 41 55;
+  --color-secondary-foreground: 243 244 246;
+  --color-accent: 17 24 39;
+  --color-accent-foreground: 243 244 246;
+  --color-destructive: 239 68 68;
+  --color-destructive-foreground: 255 255 255;
+  --color-border: 55 65 81;
+  --color-input: 55 65 81;
+  --color-ring: 59 130 246;
+}
+
+/* Base styles */
+* {
+  border-color: rgb(var(--color-border));
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: rgb(249 250 251);
+  color: rgb(17 24 39);
+  line-height: 1.6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(243 244 246);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(156 163 175);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(107 114 128);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(156 163 175) rgb(243 244 246);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Utility classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Card hover effects */
+.hover-lift {
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+.skeleton-text {
+  @apply skeleton h-4 w-full mb-2;
+}
+
+.skeleton-circle {
+  @apply skeleton h-12 w-12 rounded-full;
+}
+
+/* Status indicators */
+.status-online {
+  @apply inline-flex h-2 w-2 rounded-full bg-green-500;
+}
+
+.status-offline {
+  @apply inline-flex h-2 w-2 rounded-full bg-red-500;
+}
+
+.status-error {
+  @apply inline-flex h-2 w-2 rounded-full bg-yellow-500;
+}
+
+/* Chart styles */
+.recharts-tooltip-wrapper {
+  @apply rounded-lg shadow-lg border border-gray-200;
+}
+
+.recharts-tooltip-content {
+  @apply bg-white p-3 rounded-lg shadow-lg border border-gray-200;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Mobile specific styles */
+@media (max-width: 640px) {
+  .mobile-hidden {
+    display: none;
+  }
+  
+  .mobile-full-width {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hover-lift:hover {
+    outline: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hover-lift {
+    transition: none;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Dark mode styles */
+[data-theme="dark"] body {
+  background-color: rgb(17 24 39);
+  color: rgb(243 244 246);
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: rgb(31 41 55) !important;
+}
+
+[data-theme="dark"] .text-gray-900 {
+  color: rgb(243 244 246) !important;
+}
+
+[data-theme="dark"] .border-gray-200 {
+  border-color: rgb(55 65 81) !important;
+}
+
+/* Error boundary styles */
+.error-boundary {
+  @apply min-h-screen flex items-center justify-center p-8;
+}
+
+.error-content {
+  @apply text-center max-w-md mx-auto;
+}
+
+/* Toast notification overrides */
+.toast-container {
+  font-family: inherit;
+}
+
+/* Form validation styles */
+.field-error input {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+.field-success input {
+  @apply border-green-500 focus:border-green-500 focus:ring-green-500;
+}
+
+/* Loading overlay */
+.loading-overlay {
+  @apply fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50;
+}
+
+/* Custom checkbox and radio styles */
+.custom-checkbox {
+  @apply appearance-none h-4 w-4 border border-gray-300 rounded bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+.custom-radio {
+  @apply appearance-none h-4 w-4 border border-gray-300 rounded-full bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
